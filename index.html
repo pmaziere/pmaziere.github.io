@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>cdn_cache font test</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C400italic%2C600italic&ver=4.1" type="text/css"/>
+    <style>
+      /* this is a copy of what is sent by the above <link> tag, but the font-family name has been appended with the word "Gstatic"*/
+      @font-face {
+        font-family: 'Source Sans Pro Gstatic';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlNzbP97U9sKh0jjxbPbfOKg.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Source Sans Pro Gstatic';
+        font-style: normal;
+        font-weight: 600;
+        src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGNNE-IuDiR70wI4zXaKqWCM.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Source Sans Pro Gstatic';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoM0DauxaEVho0aInXGvhmB4k.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Source Sans Pro Gstatic';
+        font-style: italic;
+        font-weight: 600;
+        src: local('Source Sans Pro Semibold Italic'), local('SourceSansPro-SemiboldIt'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6EfrksRSinjQUrHtm_nW72g.ttf) format('truetype');
+      }
+      div{margin:20px 0}
+    </style>
+
+  </head>
+  <body>
+    <h1>Without google font</h1>
+    <div>
+      Default font is used as expected by firefox to display this text
+    </div>
+    <h1>With google font grabbed from &lt;link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C400italic%2C600italic&ver=4.1" type="text/css"/&gt;</h1>
+    <div style="font-family: 'Source Sans Pro'">
+      Should grab the CSS file and the fonts from the cache
+      <ul>
+        <li><b>with HTTPSEverywhere rule activated:</b> the CSS is cached but there is no font request sent to the cache, therefore it is not used by firefox to display this text</li>
+        <li><b>without HTTPSEverywhere rule activated:</b> the CSS and the font are downloaded and used directly from fonts.googleapis.com and fonts.gstatic.com and used as expectedby firefox to display this text</li>
+      </ul>
+    </div>
+    <h1>With google font grabbed from inlined CSS using url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlNzbP97U9sKh0jjxbPbfOKg.ttf)</h1>
+    <div style="font-family: 'Source Sans Pro Gstatic'">
+      Should only grab the fonts from the cache since CSS is inlined
+      <ul>
+        <li><b>with HTTPSEverywhere rule activated:</b> the font request is sent to the cache and used as expected by firefox to display this text</li>
+        <li><b>without HTTPSEverywhere rule activated:</b> the font is downloaded directly from fonts.gstatic.com and used as expected by firefox to display this text</li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+
