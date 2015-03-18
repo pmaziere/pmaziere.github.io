@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>cdn_cache font test</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C400italic%2C600italic&ver=4.1" type="text/css"/>
+  </head>
+  <body>
+    <h1>Without google font</h1>
+    <div>
+      Default font is used as expected by firefox to display this text
+    </div>
+    <h1>With google font grabbed from &lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C400italic%2C600italic&ver=4.1" type="text/css"/&gt;</h1>
+    <div style="font-family: 'Source Sans Pro'">
+      Should grab the CSS file and the fonts from the cache
+      <ul>
+        <li><b>with HTTPSEverywhere rule activated:</b> the CSS is cached but there is no font request sent to the cache, therefore it is not used by firefox to display this text</li>
+        <li><b>without HTTPSEverywhere rule activated:</b> the CSS and the font are downloaded and used directly from fonts.googleapis.com and fonts.gstatic.com and used as expectedby firefox to display this text</li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+
